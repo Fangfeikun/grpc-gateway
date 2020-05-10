@@ -32,7 +32,9 @@ rules_proto_dependencies()
 rules_proto_toolchains()
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
+'''
 http_archive(
     name = "io_bazel_rules_go",
     sha256 = "7b9bbe3ea1fccb46dcfa6c3f3e29ba7ec740d8733370e21cdc8937467b4a4349",
@@ -40,6 +42,14 @@ http_archive(
         "https://storage.googleapis.com/bazel-mirror/github.com/bazelbuild/rules_go/releases/download/v0.22.4/rules_go-v0.22.4.tar.gz",
         "https://github.com/bazelbuild/rules_go/releases/download/v0.22.4/rules_go-v0.22.4.tar.gz",
     ],
+)
+'''
+
+git_repository(
+    name = "io_bazel_rules_go",
+    commit = "28dd92b09c978ad09c74c18161a1da844235adfb",
+    remote = "https://github.com/bazelbuild/rules_go",
+    shallow_since = "1588968113 -0400",
 )
 
 http_archive(
@@ -67,8 +77,6 @@ gazelle_dependencies()
 load("//:repositories.bzl", "go_repositories")
 
 go_repositories()
-
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 git_repository(
     name = "com_google_protobuf",
